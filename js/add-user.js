@@ -1,4 +1,4 @@
-class EditContact {
+class AddUser {
     constructor() {
         this.contactMainContent = ['First Name','Last Name','Company'];
         this.contactAdditionalContent =['Add  home phone','Add email','Add address','Add birthday','Add social profile','Add field'];
@@ -77,6 +77,4 @@ class EditContact {
         return this
     }
 }
-let editContact = new EditContact();
-editContact.render();
-
+let addUser = new AddUser();

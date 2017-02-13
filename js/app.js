@@ -21,29 +21,35 @@
         ];
         this.tableHead = ['Name','Surname','Email']
     }
-     // router(){
-     //     document.getElementById('Contact').onclick = function (event) {
-     //         let index = new Index();
-     //         index.render().buttonAction();
-     //     };
-     //     document.getElementById('Keypad').onclick = function (event) {
-     //         let keypad = new Keypad();
-     //         keypad.render();
-     //         keypad.buttonAction();
-     //     };
-     //     document.getElementById('Edit contact').onclick = function (event) {
-     //         let editContact = new EditContact();
-     //         editContact.render();
-     //     };
-     //     document.getElementById('User').onclick = function (event) {
-     //         let user = new User();
-     //         user.render();
-     //     };
-     //     document.getElementById('Add user').onclick = function (event) {
-     //         let editContact = new EditContact();
-     //         editContact.render();
-     //     };
-     // }
+    rerender(){
+        document.body.querySelector('header').remove();
+        document.body.querySelector('main').remove();
+    }
+     router(){
+         let routes = [...document.querySelectorAll('.main-nav>a')];
+         for(let i=0;i<routes.length;i++){
+             let route = routes[i];
+             route.addEventListener('click',(event) =>{
+                 event.preventDefault();
+                 index.rerender();
+                 if (route.getAttribute('href')=='index.html'){
+                     index.render();
+                 }
+                 else if(route.getAttribute('href')=='keypad.html'){
+                     keypad.render();
+                 }
+                 else if(route.getAttribute('href')=='edit-contact.html'){
+                     editContact.render();
+                 }
+                 else if((route.getAttribute('href')=='user.html')){
+                     user.render();
+                 }else if((route.getAttribute('href')=='add-user.html')){
+                     addUser.render();
+                 }
+             })
+         }
+         //console.log(routes);
+     }
     buttonAction() {
         //удаление через backspace в поиске
         document.body.querySelector('.form-control').addEventListener('keydown',(event)=>{
@@ -148,4 +154,4 @@
  let index = new Index();
  index.render();
  index.buttonAction();
- //index.router();
+ index.router();

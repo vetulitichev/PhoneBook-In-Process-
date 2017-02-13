@@ -75,5 +75,3 @@ class EditContact {
     }
 }
 let editContact = new EditContact();
-editContact.render();
-

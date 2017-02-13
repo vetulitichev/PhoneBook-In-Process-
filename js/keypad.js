@@ -4,7 +4,7 @@ class Keypad{
         this.numberLength = 0;
     }
     test(phoneNumber){
-        phoneNumber = phoneNumber.replace(/(\d{3})(\d{3})(\d{2})(\d{2})/g,'($1)$2-$3-$4');
+
         return phoneNumber;
     }
     header(){
@@ -17,7 +17,7 @@ class Keypad{
     mainKeypad(){
         return` <div class="number">
                     <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                    <span class="numbers" contenteditable="true" p></span>
+                    <span class="numbers" contenteditable="true" ></span>
                     <span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true" ></span>
                 </div>`
     }
@@ -50,6 +50,7 @@ class Keypad{
         return `${this.header()}${this.main()}`
     }
     buttonAction(){
+        //----------------------adding numbers using keyboard--------------------------//
         window.addEventListener('keydown', (e)=>{
             if (!e.key.search('Backspace')) {
                 let tmp =document.querySelector('span.numbers').textContent;
@@ -61,23 +62,24 @@ class Keypad{
             }
         });
         document.body.addEventListener('keydown', (e)=>{
-            if (this.numberLength < 12 ) {
+            if (this.numberLength < 10 ) {
                 if(e.key.search(/([A-z])|(\+)/)) {
                     let numbers = document.querySelector('.numbers').textContent;
                     numbers += e.key;
-                    numbers = this.test(numbers);
+                    numbers = numbers.replace(/(\d{3})(\d{3})(\d{2})(\d{2})/g,'($1)$2-$3-$4');
                     document.querySelector('span.numbers').textContent = numbers;
                     this.numberLength++;
                 }
              }
         });
+        //----------------------adding numbers using buttons--------------------------//
         document.body.addEventListener('click',(e)=>{
-            if(e.target.tagName == 'BUTTON') {
 
-                if (this.numberLength < 12) {
+            if(e.target.tagName == 'BUTTON') {
+                if (this.numberLength < 10) {
                     let numbers = document.querySelector('.numbers').textContent;
                     numbers += e.target.innerText;
-                    numbers = this.test(numbers);
+                    numbers = numbers.replace(/(\d{3})(\d{3})(\d{2})(\d{2})/g,'($1)$2-$3-$4');
                     document.querySelector('span.numbers').textContent = numbers;
                     this.numberLength++;
                 }
@@ -97,5 +99,4 @@ class Keypad{
     }
 }
 let keypad = new Keypad();
-        keypad.render();
-        keypad.buttonAction();
+keypad.buttonAction();
